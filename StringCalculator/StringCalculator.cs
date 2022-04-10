@@ -7,17 +7,22 @@ namespace kata_string_calculator
     {
         public int Calculate(string s)
         {
-            if (s.Contains(','))
-            {
-                var numbers = s.Split(',');
-                var sum = int.Parse(numbers[0]) + int.Parse(numbers[1]);
-                return sum;
-            }
-            else
-            {
-                var parseSuccess = int.TryParse(s, out var number);
-                return parseSuccess ? number : 0;
-            }
+            return s.Contains(',') ? HandleMultipleDigits(s) : HandleSingleDigit(s);
         }
+
+        private int HandleSingleDigit(string singleDigit)
+        {
+            var parseSuccess = int.TryParse(singleDigit, out var number);
+            return parseSuccess ? number : 0;
+        }
+        
+        private int HandleMultipleDigits(string multipleDigits)
+        {
+            var numbers = multipleDigits.Split(',');
+            var sum = int.Parse(numbers[0]) + int.Parse(numbers[1]);
+            return sum;
+        }
+        
+        
     }
 }
