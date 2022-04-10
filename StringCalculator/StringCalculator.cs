@@ -1,10 +1,14 @@
+using System;
+
 namespace kata_string_calculator
 {
     public class StringCalculator
     {
         public int Calculate(string s)
         {
-            return 0;
+            var parseSuccess = int.TryParse(s, out var number);
+            
+            return parseSuccess ? number : 0;
         }
     }
 }
