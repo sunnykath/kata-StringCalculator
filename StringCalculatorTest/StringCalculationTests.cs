@@ -34,5 +34,22 @@ namespace StringCalculatorTest
             // Assert
             Assert.Equal(expectedNumber, actualNumber);
         }
+        
+        [Theory]
+        [InlineData(1, 2)]
+        [InlineData(2, 4)]
+        [InlineData(3, 5)]
+        public void Should_Return_The_Sum_When_Two_Numbers_Are_Passed_In(int firstNumber, int secondNumber)
+        {
+            // Arrange
+            var stringCalculator = new StringCalculator();
+            var expectedSum = firstNumber + secondNumber;
+
+            // Act
+            var actualSum = stringCalculator.Calculate($"{firstNumber},{secondNumber}");
+
+            // Assert
+            Assert.Equal(expectedSum, actualSum);
+        }
     }
 }
