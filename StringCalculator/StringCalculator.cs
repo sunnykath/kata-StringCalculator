@@ -5,35 +5,37 @@ namespace kata_string_calculator
 {
     public class StringCalculator
     {
+        private const string OptionalArg = "//";
+        
         private char _customDelimiter;
         private readonly char[] _separators = {',', '\n'};
         private string _inputString;
-        public int Calculate(string stringInput)
+        public int Add(string stringInput)
         {
             _inputString = stringInput;
-            if (stringInput.Contains("//"))
+            
+            if (_inputString.Contains(OptionalArg))
             {
                 UpdateCustomDelimiter(stringInput);
                 _inputString = _inputString.Substring(4);
             }
-            
-            return _separators.Any(stringInput.Contains) ? CalculateSumOfMultipleNumbers() : CalculateOutputForSingleOrNoDigit();
+
+            return CalculateSumOfMultipleNumbers();
         }
 
         private void UpdateCustomDelimiter(string stringInput)
         {
             _customDelimiter = stringInput[2];
         }
-
-        private int CalculateOutputForSingleOrNoDigit()
-        {
-            var parseSuccess = int.TryParse(_inputString, out var number);
-            return parseSuccess ? number : 0;
-        }
         
         private int CalculateSumOfMultipleNumbers()
         {
-            var customSeparators = _separators.Append(_customDelimiter).ToArray();
+            var customSeparators = _separators;
+            if (_customDelimiter != 0)
+            {
+                customSeparators = customSeparators.Append(_customDelimiter).ToArray();
+            }
+
             var numbers = _inputString.Split(customSeparators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
             
             return numbers.Sum();
