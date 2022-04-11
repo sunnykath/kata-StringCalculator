@@ -17,9 +17,9 @@ namespace kata_string_calculator
         
         private int CalculateSumOfMultipleNumbers(string numberString)
         {
-            var numbers = numberString.Split(',').Select(int.Parse).ToArray();
-            var sum = numbers[0] + numbers[1];
-            return sum;
+            var numbers = numberString.Split(',').Select(int.Parse);
+            
+            return numbers.Sum();
         }
     }
 }
