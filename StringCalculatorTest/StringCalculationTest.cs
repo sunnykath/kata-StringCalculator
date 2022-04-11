@@ -132,7 +132,7 @@ namespace StringCalculatorTest
         }
 
         [Theory]
-        [InlineData(3, "//[***]\n1***2***3")]
+        [InlineData(6, "//[***]\n1***2***3")]
         [InlineData(8, "//[---]\n3---5")]
         [InlineData(7, "//[+++]\n6+++1")]
         public void Should_Use_The_Delimiter_Provided_Of_Any_Length_In_The_Input_To_Separate_The_Numbers(int expectedSum, string stringInput)

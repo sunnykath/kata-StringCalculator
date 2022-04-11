@@ -9,7 +9,7 @@ namespace kata_string_calculator
         private const string OptionalArg = "//";
         private const int CustomDelimiterIndex = 2;
         
-        private char[] _separators = {',', '\n'};
+        private string[] _separators = {",", "\n"};
         private string _inputString;
         public int Add(string stringInput)
         {
@@ -17,8 +17,9 @@ namespace kata_string_calculator
             
             if (_inputString.Contains(OptionalArg))
             {
-                UpdateDelimitersWithCustomDelimiter(stringInput);
-                _inputString = _inputString.Substring(4);
+                var endOfCustomDelimiter = _inputString.IndexOf('\n');
+                UpdateDelimitersWithCustomDelimiter(stringInput[..endOfCustomDelimiter]);
+                _inputString = _inputString[endOfCustomDelimiter..];
             }
 
             return CalculateSumOfString();
@@ -26,7 +27,13 @@ namespace kata_string_calculator
 
         private void UpdateDelimitersWithCustomDelimiter(string stringInput)
         {
-            _separators = _separators.Append(stringInput[CustomDelimiterIndex]).ToArray();
+            var customDelimiter = stringInput[CustomDelimiterIndex] + "";
+            if (stringInput.Contains('['))
+            {
+                var startOfDelimiter = stringInput.IndexOf('[') + 1;
+                customDelimiter = stringInput.Substring(startOfDelimiter, stringInput.Length - 1 - startOfDelimiter);
+            }
+            _separators = _separators.Append(customDelimiter).ToArray();
         }
         
         private int CalculateSumOfString()
@@ -52,7 +59,7 @@ namespace kata_string_calculator
 
         private IEnumerable<int> RemoveNumbersBiggerThanThousand(IEnumerable<int> numbers)
         {
-            return numbers.Where(number => number < 1000).ToArray();
+            return numbers.Where(number => number < 1000);
         }
     }
 }
