@@ -20,7 +20,7 @@ namespace kata_string_calculator
                 _inputString = _inputString.Substring(4);
             }
 
-            return CalculateSumOfMultipleNumbers();
+            return CalculateSumOfString();
         }
 
         private void UpdateCustomDelimiter(string stringInput)
@@ -28,7 +28,7 @@ namespace kata_string_calculator
             _customDelimiter = stringInput[2];
         }
         
-        private int CalculateSumOfMultipleNumbers()
+        private int CalculateSumOfString()
         {
             var customSeparators = _separators;
             if (_customDelimiter != 0)
