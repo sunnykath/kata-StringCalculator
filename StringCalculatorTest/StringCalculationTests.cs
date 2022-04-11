@@ -19,14 +19,12 @@ namespace StringCalculatorTest
             Assert.IsType<int>(result);
         }
         
-        [Theory]
-        [InlineData(1)]
-        [InlineData(2)]
-        [InlineData(3)]
-        public void Should_Return_The_Same_Number_That_Was_Passed_In(int expectedNumber)
+        [Fact]
+        public void Should_Return_The_Same_Number_That_Was_Passed_In()
         {
             // Arrange
             var stringCalculator = new StringCalculator();
+            var expectedNumber = 1;
 
             // Act
             var actualNumber = stringCalculator.Calculate($"{expectedNumber}");
