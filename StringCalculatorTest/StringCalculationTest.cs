@@ -13,7 +13,7 @@ namespace StringCalculatorTest
             var stringCalculator = new StringCalculator();
 
             // Act
-            var result = stringCalculator.Calculate("");
+            var result = stringCalculator.Add("");
 
             // Assert
             Assert.IsType<int>(result);
@@ -29,7 +29,7 @@ namespace StringCalculatorTest
             var stringCalculator = new StringCalculator();
 
             // Act
-            var actualNumber = stringCalculator.Calculate($"{expectedNumber}");
+            var actualNumber = stringCalculator.Add($"{expectedNumber}");
 
             // Assert
             Assert.Equal(expectedNumber, actualNumber);
@@ -45,7 +45,7 @@ namespace StringCalculatorTest
             var stringCalculator = new StringCalculator();
 
             // Act
-            var actualSum = stringCalculator.Calculate(stringInput);
+            var actualSum = stringCalculator.Add(stringInput);
 
             // Assert
             Assert.Equal(expectedSum, actualSum);
@@ -61,7 +61,7 @@ namespace StringCalculatorTest
             var stringCalculator = new StringCalculator();
 
             // Act
-            var actualSum = stringCalculator.Calculate(stringInput);
+            var actualSum = stringCalculator.Add(stringInput);
 
             // Assert
             Assert.Equal(expectedSum, actualSum);
@@ -77,7 +77,7 @@ namespace StringCalculatorTest
             var stringCalculator = new StringCalculator();
 
             // Act
-            var actualSum = stringCalculator.Calculate(stringInput);
+            var actualSum = stringCalculator.Add(stringInput);
 
             // Assert
             Assert.Equal(expectedSum, actualSum);
@@ -91,7 +91,7 @@ namespace StringCalculatorTest
             var stringCalculator = new StringCalculator();
 
             // Act
-            var actualSum = stringCalculator.Calculate(stringInput);
+            var actualSum = stringCalculator.Add(stringInput);
 
             // Assert
             Assert.Equal(expectedSum, actualSum);
