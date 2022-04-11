@@ -13,7 +13,7 @@ namespace StringCalculatorTest
             var stringCalculator = new StringCalculator();
 
             // Act
-            var result = stringCalculator.Calculate("");
+            var result = stringCalculator.Calculate();
 
             // Assert
             Assert.IsType<int>(result);
