@@ -5,21 +5,36 @@ namespace kata_string_calculator
 {
     public class StringCalculator
     {
+        private char _customDelimiter;
+        private readonly char[] _separators = {',', '\n'};
+        private string _inputString;
         public int Calculate(string stringInput)
         {
-            return stringInput.Contains(',') ? CalculateSumOfMultipleNumbers(stringInput) : CalculateOutputForSingleOrNoDigit(stringInput);
+            _inputString = stringInput;
+            if (stringInput.Contains("//"))
+            {
+                UpdateCustomDelimiter(stringInput);
+                _inputString = _inputString.Substring(4);
+            }
+            
+            return _separators.Any(stringInput.Contains) ? CalculateSumOfMultipleNumbers() : CalculateOutputForSingleOrNoDigit();
         }
 
-        private int CalculateOutputForSingleOrNoDigit(string singleDigit)
+        private void UpdateCustomDelimiter(string stringInput)
         {
-            var parseSuccess = int.TryParse(singleDigit, out var number);
+            _customDelimiter = stringInput[2];
+        }
+
+        private int CalculateOutputForSingleOrNoDigit()
+        {
+            var parseSuccess = int.TryParse(_inputString, out var number);
             return parseSuccess ? number : 0;
         }
         
-        private int CalculateSumOfMultipleNumbers(string numberString)
+        private int CalculateSumOfMultipleNumbers()
         {
-            var separators = new [] {',', '\n'};
-            var numbers = numberString.Split(separators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
+            var customSeparators = _separators.Append(_customDelimiter).ToArray();
+            var numbers = _inputString.Split(customSeparators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
             
             return numbers.Sum();
         }
