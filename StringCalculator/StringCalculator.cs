@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace kata_string_calculator
@@ -17,7 +18,8 @@ namespace kata_string_calculator
         
         private int CalculateSumOfMultipleNumbers(string numberString)
         {
-            var numbers = numberString.Split(',').Select(int.Parse);
+            var separators = new [] {',', '\n'};
+            var numbers = numberString.Split(separators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
             
             return numbers.Sum();
         }
