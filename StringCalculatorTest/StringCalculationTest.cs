@@ -66,5 +66,21 @@ namespace StringCalculatorTest
             // Assert
             Assert.Equal(expectedSum, actualSum);
         }
+        
+        [Theory]
+        [InlineData(6, "1,2\n3")]
+        [InlineData(20, "3\n5\n3,9")]
+        [InlineData(27, "4\n6,2,8\n7")]
+        public void Should_Return_The_Sum_When_Multiple_Numbers_Are_Passed_In_With_Both_Comma_And_NewLineCharacter_As_Separators(int expectedSum, string stringInput)
+        {
+            // Arrange
+            var stringCalculator = new StringCalculator();
+
+            // Act
+            var actualSum = stringCalculator.Calculate(stringInput);
+
+            // Assert
+            Assert.Equal(expectedSum, actualSum);
+        }
     }
 }
