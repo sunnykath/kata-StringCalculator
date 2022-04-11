@@ -36,7 +36,14 @@ namespace kata_string_calculator
                 customSeparators = customSeparators.Append(_customDelimiter).ToArray();
             }
 
-            var numbers = _inputString.Split(customSeparators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
+            var numbers = _inputString.Split(customSeparators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+
+            var negativeNumbers = numbers.Where(number => number < 0).ToArray();
+
+            if (negativeNumbers.Length != 0)
+            {
+                throw new Exception($"Negatives not allowed: {string.Join(", ", negativeNumbers)}");
+            }
             
             return numbers.Sum();
         }

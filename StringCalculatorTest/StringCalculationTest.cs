@@ -87,7 +87,7 @@ namespace StringCalculatorTest
         [Theory]
         [InlineData(3, "//;\n1;2")]
         [InlineData(8, "//-\n3-5")]
-        [InlineData(7, "/k/+\n6+1")]
+        [InlineData(7, "//+\n6+1")]
         public void Should_Use_The_Delimiter_Provided_In_The_Input_To_Separate_The_Numbers(int expectedSum, string stringInput)
         {
             // Arrange
@@ -102,6 +102,8 @@ namespace StringCalculatorTest
 
         [Theory]
         [InlineData("-1,2,-3", "-1, -3")]
+        [InlineData("4,6,-5", "-5")]
+        [InlineData("-32,-45, 99", "-32, -45")]
         public void Should_Throw_Exception_When_Negative_Numbers_Are_Inputted(string stringInput, string negativeNumbers)
         {
             // Arrange
