@@ -1,20 +1,25 @@
+using System.Linq;
+
 namespace kata_string_calculator
 {
     public class StringCalculator
     {
         public int Calculate(string stringInput)
         {
-            if (stringInput.Contains(','))
-            {
-                var numbers = stringInput.Split(',');
-                var sum = int.Parse(numbers[0]) + int.Parse(numbers[1]);
-                return sum;
-            }
-            else
-            {
-                var parseSuccess = int.TryParse(stringInput, out var number);
-                return parseSuccess ? number : 0;
-            }
+            return stringInput.Contains(',') ? CalculateSumOfMultipleNumbers(stringInput) : CalculateOutputForSingleOrNoDigit(stringInput);
+        }
+
+        private int CalculateOutputForSingleOrNoDigit(string singleDigit)
+        {
+            var parseSuccess = int.TryParse(singleDigit, out var number);
+            return parseSuccess ? number : 0;
+        }
+        
+        private int CalculateSumOfMultipleNumbers(string numberString)
+        {
+            var numbers = numberString.Split(',').Select(int.Parse).ToArray();
+            var sum = numbers[0] + numbers[1];
+            return sum;
         }
     }
 }
