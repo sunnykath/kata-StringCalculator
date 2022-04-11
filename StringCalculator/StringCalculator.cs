@@ -18,9 +18,10 @@ namespace kata_string_calculator
         
         private int HandleMultipleDigits(string multipleDigits)
         {
-            var numbers = multipleDigits.Split(',');
-            var sum = int.Parse(numbers[0]) + int.Parse(numbers[1]);
-            return sum;
+            var numberStrings = multipleDigits.Split(',');
+            var numbers = numberStrings.Select(int.Parse);
+            
+            return numbers.Sum();
         }
         
         
