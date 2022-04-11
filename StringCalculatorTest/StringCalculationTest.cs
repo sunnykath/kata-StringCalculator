@@ -1,3 +1,4 @@
+using System;
 using kata_string_calculator;
 using Xunit;
 
@@ -97,6 +98,21 @@ namespace StringCalculatorTest
 
             // Assert
             Assert.Equal(expectedSum, actualSum);
+        }
+
+        [Theory]
+        [InlineData("-1,2,-3", "-1, -3")]
+        public void Should_Throw_Exception_When_Negative_Numbers_Are_Inputted(string stringInput, string negativeNumbers)
+        {
+            // Arrange
+            var stringCalculator = new StringCalculator();
+
+            // Act
+
+            // Assert
+            var exception = Assert.Throws<Exception>(() => stringCalculator.Add(stringInput));
+            Assert.Contains($"Negatives not allowed: {negativeNumbers}", exception.Message);
+            
         }
     }
 }
