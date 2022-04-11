@@ -4,7 +4,9 @@ namespace kata_string_calculator
     {
         public int Calculate(string stringInput)
         {
-            return 0;
+            var parseSuccess = int.TryParse(stringInput, out var number);
+            
+            return parseSuccess ? number : 0;
         }
     }
 }
