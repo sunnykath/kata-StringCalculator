@@ -114,7 +114,21 @@ namespace StringCalculatorTest
             // Assert
             var exception = Assert.Throws<Exception>(() => stringCalculator.Add(stringInput));
             Assert.Contains($"Negatives not allowed: {negativeNumbers}", exception.Message);
+        }
+        
+        [Theory]
+        [InlineData(2, "1000,1001,2")]
+        [InlineData(227, "1111,5,3333,222")]
+        public void Should_Return_The_Sum_Of_Numbers_That_Are_Less_Than_A_Thousand(int expectedSum, string stringInput)
+        {
+            // Arrange
+            var stringCalculator = new StringCalculator();
+
+            // Act
+            var actualSum = stringCalculator.Add(stringInput);
             
+            // Assert
+            Assert.Equal(expectedSum, actualSum);
         }
     }
 }
