@@ -36,10 +36,26 @@ namespace StringCalculatorTest
         }
         
         [Theory]
-        [InlineData(3, "1, 2")]
-        [InlineData(6, "2, 4")]
-        [InlineData(8, "3, 5")]
+        [InlineData(3, "1,2")]
+        [InlineData(6, "2,4")]
+        [InlineData(8, "3,5")]
         public void Should_Return_The_Sum_When_Two_Numbers_Are_Passed_In(int expectedSum, string stringInput)
+        {
+            // Arrange
+            var stringCalculator = new StringCalculator();
+
+            // Act
+            var actualSum = stringCalculator.Calculate(stringInput);
+
+            // Assert
+            Assert.Equal(expectedSum, actualSum);
+        }
+        
+        [Theory]
+        [InlineData(6, "1,2,3")]
+        [InlineData(20, "3,5,3,9")]
+        [InlineData(27, "4,6,2,8,7")]
+        public void Should_Return_The_Sum_When_Multiple_Numbers_Are_Passed_In(int expectedSum, string stringInput)
         {
             // Arrange
             var stringCalculator = new StringCalculator();
