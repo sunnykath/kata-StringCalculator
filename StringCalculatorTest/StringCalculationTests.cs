@@ -18,19 +18,5 @@ namespace StringCalculatorTest
             // Assert
             Assert.IsType<int>(result);
         }
-        
-        [Fact]
-        public void Should_Return_The_Same_Number_That_Was_Passed_In()
-        {
-            // Arrange
-            var stringCalculator = new StringCalculator();
-            var expectedNumber = 1;
-
-            // Act
-            var actualNumber = stringCalculator.Calculate($"{expectedNumber}");
-
-            // Assert
-            Assert.Equal(expectedNumber, actualNumber);
-        }
     }
 }
