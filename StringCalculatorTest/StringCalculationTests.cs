@@ -1,4 +1,3 @@
-using System.Linq;
 using kata_string_calculator;
 using Xunit;
 
@@ -48,30 +47,6 @@ namespace StringCalculatorTest
 
             // Act
             var actualSum = stringCalculator.Calculate($"{firstNumber},{secondNumber}");
-
-            // Assert
-            Assert.Equal(expectedSum, actualSum);
-        }
-        
-        [Theory]
-        [InlineData(1, 2, 3)]
-        [InlineData(3, 5, 3, 9)]
-        [InlineData(4, 6, 2, 8, 7)]
-        public void Should_Return_The_Sum_When_Multiple_Numbers_Are_Passed_In(params int[] numbers)
-        {
-            // Arrange
-            var stringCalculator = new StringCalculator();
-            var expectedSum = numbers.Sum();
-            var stringInput = "";
-            for (var i = 0; i < numbers.Length; i++)
-            {
-                stringInput += $"{numbers[i]}";
-                
-                if (i != numbers.Length - 1) stringInput += ",";
-            }
-
-            // Act
-            var actualSum = stringCalculator.Calculate(stringInput);
 
             // Assert
             Assert.Equal(expectedSum, actualSum);
