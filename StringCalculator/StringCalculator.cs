@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace kata_string_calculator
@@ -30,13 +31,15 @@ namespace kata_string_calculator
         
         private int CalculateSumOfString()
         {
-            var numbers = _inputString.Split(_separators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            var initialNumbers = _inputString.Split(_separators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
-            CheckForNegatives(numbers);
+            CheckForNegatives(initialNumbers);
+
+            var numbers = RemoveNumbersBiggerThanThousand(initialNumbers);
             
             return numbers.Sum();
         }
-
+        
         private void CheckForNegatives(int[] numbers)
         {
             var negativeNumbers = numbers.Where(number => number < 0).ToArray();
@@ -45,6 +48,11 @@ namespace kata_string_calculator
             {
                 throw new Exception($"Negatives not allowed: {string.Join(", ", negativeNumbers)}");
             }
+        }
+
+        private IEnumerable<int> RemoveNumbersBiggerThanThousand(IEnumerable<int> numbers)
+        {
+            return numbers.Where(number => number < 1000).ToArray();
         }
     }
 }
