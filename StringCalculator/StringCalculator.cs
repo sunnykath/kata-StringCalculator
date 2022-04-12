@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace kata_string_calculator
 {
@@ -8,7 +9,9 @@ namespace kata_string_calculator
     {
         private const string OptionalArg = "//";
         private const int CustomDelimiterIndex = 2;
-        
+        private const char StartOfCustomDelimiter = '[';
+        private const string CustomDelimiterRegex = "(?<=\\[).+?(?=\\])";
+
         private string[] _separators = {",", "\n"};
         private string _inputString;
         public int Add(string stringInput)
@@ -21,28 +24,35 @@ namespace kata_string_calculator
                 UpdateDelimitersWithCustomDelimiter(stringInput[..endOfCustomDelimiter]);
                 _inputString = _inputString[endOfCustomDelimiter..];
             }
-
-            return CalculateSumOfString();
+            return GetSumOfString();
         }
 
         private void UpdateDelimitersWithCustomDelimiter(string stringInput)
         {
-            var customDelimiter = stringInput[CustomDelimiterIndex] + "";
-            if (stringInput.Contains('['))
+            List<string> customDelimiters = new ();
+            
+            if (stringInput.Contains(StartOfCustomDelimiter))
             {
-                var startOfDelimiter = stringInput.IndexOf('[') + 1;
-                customDelimiter = stringInput.Substring(startOfDelimiter, stringInput.Length - 1 - startOfDelimiter);
+                var delimiterStrings = Regex.Matches(stringInput, CustomDelimiterRegex);
+                foreach (var delimiter in delimiterStrings)
+                {
+                    customDelimiters = customDelimiters.Append(delimiter.ToString()!).ToList();
+                }
             }
-            _separators = _separators.Append(customDelimiter).ToArray();
+            else
+            {
+                customDelimiters = customDelimiters.Append(stringInput[CustomDelimiterIndex] + "").ToList();
+            }
+            customDelimiters.ForEach(delimiter => _separators = _separators.Append(delimiter).ToArray());
         }
         
-        private int CalculateSumOfString()
+        private int GetSumOfString()
         {
             var initialNumbers = _inputString.Split(_separators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
             CheckForNegatives(initialNumbers);
 
-            var numbers = RemoveNumbersBiggerThanThousand(initialNumbers);
+            var numbers = GetNumbersBelowAThousand(initialNumbers);
             
             return numbers.Sum();
         }
@@ -57,7 +67,7 @@ namespace kata_string_calculator
             }
         }
 
-        private IEnumerable<int> RemoveNumbersBiggerThanThousand(IEnumerable<int> numbers)
+        private IEnumerable<int> GetNumbersBelowAThousand(IEnumerable<int> numbers)
         {
             return numbers.Where(number => number < 1000);
         }
