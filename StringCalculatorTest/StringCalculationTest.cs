@@ -146,5 +146,21 @@ namespace StringCalculatorTest
             // Assert
             Assert.Equal(expectedSum, actualSum);
         }
+
+        [Theory]
+        [InlineData(6, "//[*][%]\n1*2%3")]
+        [InlineData(21, "//[-][*][^]\n3*9-5^4")]
+        [InlineData(14, "//[+][#]\n6+1#7")]
+        public void Should_Use_All_The_Delimiters_Provided_In_The_Input_To_Separate_The_Numbers(int expectedSum, string stringInput)
+        {
+            // Arrange
+            var stringCalculator = new StringCalculator();
+
+            // Act
+            var actualSum = stringCalculator.Add(stringInput);
+
+            // Assert
+            Assert.Equal(expectedSum, actualSum);
+        }
     }
 }
