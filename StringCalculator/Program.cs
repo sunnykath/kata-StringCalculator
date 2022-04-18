@@ -1,3 +1,3 @@
 ﻿using System;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("This is a String Calculator Kata!");
