@@ -1,5 +1,6 @@
 using System;
 using kata_string_calculator;
+using kata_string_calculator.Delimiters;
 using Xunit;
 
 namespace StringCalculatorTest
@@ -9,7 +10,9 @@ namespace StringCalculatorTest
         private readonly StringCalculator _stringCalculator;
         public StringCalculationTests()
         {
-            _stringCalculator = new StringCalculator();
+            var delimitersHandler = new DelimitersHandler();
+            var validator = new NumberValidation();
+            _stringCalculator = new StringCalculator(delimitersHandler, validator);
         }
         
         [Fact]
