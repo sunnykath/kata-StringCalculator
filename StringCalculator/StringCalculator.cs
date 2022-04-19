@@ -1,5 +1,6 @@
 using System.Linq;
 using kata_string_calculator.Delimiters;
+using kata_string_calculator.Validation;
 
 namespace kata_string_calculator
 {
@@ -18,13 +19,8 @@ namespace kata_string_calculator
         {
             var numbers = _stringConversion.GetNumbersFromString(stringInput);
 
-            return GetValidSumOfNumbers(numbers);
-        }
-
-        private int GetValidSumOfNumbers(int[] allNumbers)
-        {
-            var validNumbers = _validator.GetValidNumbers(allNumbers);
-
+            var validNumbers = _validator.GetValidNumbers(numbers);
+            
             return validNumbers.Sum();
         }
     }

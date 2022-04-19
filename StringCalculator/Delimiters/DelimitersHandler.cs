@@ -6,13 +6,13 @@ namespace kata_string_calculator.Delimiters
 {
     public class DelimitersHandler : IDelimiters
     {
-        private string[] _delimiters = {",", "\n"};        
-        private string _numbersInStringInput = null!;
-
         private const string OptionalArg = "//";
         private const int CustomDelimiterIndex = 2;
         private const char StartOfCustomDelimiter = '[';
         private const string CustomDelimiterRegex = "(?<=\\[).+?(?=\\])";
+        
+        private string[] _delimiters = {",", "\n"};        
+        private string _numbersInStringInput = null!;
         
         public void HandleDelimiters(string inputString)
         {

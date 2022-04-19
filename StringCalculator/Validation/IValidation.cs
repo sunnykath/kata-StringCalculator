@@ -1,4 +1,4 @@
-namespace kata_string_calculator
+namespace kata_string_calculator.Validation
 {
     public interface IValidation
     {

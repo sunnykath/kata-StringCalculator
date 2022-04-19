@@ -1,6 +1,7 @@
 using System;
 using kata_string_calculator;
 using kata_string_calculator.Delimiters;
+using kata_string_calculator.Validation;
 using Xunit;
 
 namespace StringCalculatorTest
