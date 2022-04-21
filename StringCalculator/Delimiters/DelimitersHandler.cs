@@ -12,7 +12,7 @@ namespace kata_string_calculator.Delimiters
         private const string CustomDelimiterRegex = "(?<=\\[).+?(?=\\])";
         
         private string[] _delimiters = {",", "\n"};        
-        private string _numbersInStringInput = null!;
+        private string _numbersInStringInput = "";
         
         public void HandleDelimiters(string inputString)
         {
