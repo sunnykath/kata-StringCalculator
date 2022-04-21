@@ -26,6 +26,16 @@ namespace StringCalculatorTest
             Assert.IsType<int>(result);
         }
         
+        [Fact]
+        public void Should_Return_Zero_When_Given_An_Empty_String()
+        {
+            // Act
+            var result = _stringCalculator.Add("");
+
+            // Assert
+            Assert.Equal(decimal.Zero, result);
+        }
+        
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
@@ -41,8 +51,8 @@ namespace StringCalculatorTest
         
         [Theory]
         [InlineData(3, "1,2")]
-        [InlineData(6, "2,4")]
-        [InlineData(8, "3,5")]
+        [InlineData(66, "24,42")]
+        [InlineData(44, "39,5")]
         public void Should_Return_The_Sum_When_Two_Numbers_Are_Passed_In(int expectedSum, string stringInput)
         {
             // Act
@@ -105,6 +115,7 @@ namespace StringCalculatorTest
         [Theory]
         [InlineData(2, "1000,1001,2")]
         [InlineData(227, "1111,5,3333,222")]
+        [InlineData(1002, "499,501,2,1005")]
         public void Should_Return_The_Sum_Of_Numbers_That_Are_Less_Than_A_Thousand(int expectedSum, string stringInput)
         {
             // Act
